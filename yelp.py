@@ -1,3 +1,6 @@
+"""
+This Python script sends a signed OAuth request to Yelp's Search web service and parses the JSON file returned in a looping manner until it reaches the known limit of Yelp's returned results - 1000
+"""
 import requests
 import oauth2
 import json
@@ -14,6 +17,7 @@ url="http://api.yelp.com/v2/search"
 
 lines = ['{"businesses": [']
 
+# Loop by incrementing the offset until it hits 1000 results returned
 for num in range (0,980,20):
 
     url_params.update({'offset':num+1})
@@ -36,9 +40,11 @@ for num in range (0,980,20):
     businesses = re.sub(r'^{\"region\":.+?\"businesses\":\s\[({.+?})\].+?$',r'\1,',requests.get(signed_url).text)  
     lines.append(businesses)
 
+# Remove the last line and checks if that contains a ',' at the end. It should have since every line is appended with a ',' in the loop above
 temp = lines[-1]
 del lines[-1]
 
+# If it does, remove the ',' and append the line back
 if temp[-1]==',':
    lines.append(temp[:-1])
 else:
@@ -46,6 +52,7 @@ else:
 
 lines.append("]}")
 
+# Write the results to a valid JSON file
 fo = open('yelp_singapore_food.json', 'w')
 fo.writelines(lines)
 fo.close()
