@@ -5,10 +5,10 @@ import sys
 import time
 import re
 
-consumer_key = "v3acanScu5CqgCQkeREyBA"
-consumer_secret = "m9xLA0mcHABmnPlsBmvFXaCcTd0"
-token = "-G5ql8wzWFsUm0qfgCQjeKutPnrgkMZo"
-token_secret ="OX6h2FkBhiSQZIqQTtiVyn4SVO8"
+consumer_key = "your consumer key"
+consumer_secret = "your consumer secret"
+token = "your token"
+token_secret ="your token secret"
 url_params = {'location':'Singapore', 'cc':'SG', 'limit':'20', 'offset' : '0', 'category_filter':'food'}
 url="http://api.yelp.com/v2/search"
 
